@@ -41,8 +41,11 @@ print(result)
 outermost_directory = directories.get(".")
 unused_space = 70000000 - outermost_directory
 to_delete = 30000000 - unused_space
+print(to_delete)
 
-diffs = {k: v - unused_space for k,v in directories.items()}
-dir = min([i for i in diffs.values() if i > 0])
+diffs = {k: v - to_delete for k,v in directories.items() if (v - to_delete) > 0}
+diff = min([i for i in diffs.values() if i > 0])
+
+dir = {k: directories.get(k) for k, v in diffs.items() if v == diff}
 
 print(dir)
